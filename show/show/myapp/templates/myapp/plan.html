@@ -1,0 +1,224 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>规划行程</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<script src="{% static 'js/jQuery1.8.2.js' %}" type="text/javascript"></script>
+<!--[if IE]><script src="{% static 'js/html5.js' %}" type="text/javascript"></script><![endif]-->
+</head>
+<body>
+<!--头部开始-->
+<header data-waypointsok="" class="header mysection">
+  <div class="tem_inner tem_head mynav mysection_s">
+
+    <h1> <a class="logo_img" href="" title=""> <img src="{% static 'images/logo1.jpg' %}" alt="" title="" /> </a> </h1>
+    <nav>
+      <ul>
+         <li><a href="/myapp/" title="网站首页">网站首页</a></li>
+        <li><a href="/myapp/self_center/" title="个人中心">个人中心</a></li>
+		<li><a href="/myapp/plan_init/" title="规划行程">规划行程</a></li>
+        <li><a href="/myapp/comment/" title="评论中心">评论中心</a></li>
+        <li><a href="/myapp/diary/" title="日记生成">日记生成</a></li>
+        <li><a href="/myapp/question/" title="在线问答">在线问答</a></li>
+        <li><a href="/myapp/login/" title="注销">注销|切换账号</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!--头部结束-->
+
+<!--banner开始-->
+
+<div class="tem_banner">
+  <ul class="slides" style="height:380px;">
+    <li style="background:url({% static 'images/plan.jpg' %}) no-repeat center center; height:380px;">
+
+    </li>
+  </ul>
+</div>
+<section class="met_section mynews_aside  ">
+  <aside>
+    
+	<!--banner结束-->
+
+      <!--新闻列表-->
+  
+            <ul>
+              <li><h1>出行热门榜单</h1></li>
+              <li><a href="" target="_self"><b >1</b>星海广场</a></li>
+              <li><a href="" target="_self"><b >2</b>金石滩</a></li>
+              <li><a href="" target="_self"><b >3</b>发现王国</a></li>
+              <li><a href="" target="_self"><b >4</b>旅顺日俄监狱</a></li>
+              <li><a href="" target="_self"><b >5</b>万达影城</a></li>
+              <li><a href="" target="_self"><b >6</b>老虎滩</a></li>
+              <li><a href="" target="_self"><b >7</b>大连森林动物园</a></li>
+              <li><a href="" target="_self"><b >8</b>“塘潮KTV”</a></li>
+            </ul>
+          </dd>
+        </dl>
+      
+  </aside>
+  <article>
+    <div class="met_article">
+      <section class="met_article_head">
+          <h style = " font-weight: bolder ;">
+          <font color="#743A3A">
+       {% if con %}
+          {{ con }}
+       {% endif %}
+          </font>
+          </h>
+        <h1>行程规划</h1>
+        <div class="met_position"><a href="index.html" title="首页">网站首页</a> &gt; <a href="newslist.html">行程规划</a></div>
+      </section>
+      <div class="met_clear"></div>
+      <div class="met_module2_list ">
+        <div class="">
+          <div class="my_news" >
+            <ul>
+              <li>
+                <h2> <a href="news.html" title="输入闲时信息" target="_self">输入闲时信息</a> </h2>
+                <form method ="post"  action= "/myapp/plan_init/">
+                      {% csrf_token %}
+                <label >选定日期:</label>
+                <input type="date" name="date_choose" >
+                    <br></br>
+                <label >空余小时数:</label>
+                    {% if road %}
+                <input type="number" name="hours" value = {{ road.hours }}> <label >小时</label></br></br>
+                    {% else %}
+                  <input type="number" name="hours" value = 3> <label >小时</label></br></br>
+
+                    {% endif %}
+                <label for="number">出行人数 :</label>
+                <input type="number" name="people" id="出行人数" value = 2>
+                <label for="select"> &nbsp;&nbsp; &nbsp; &nbsp;与出行人关系:</label>
+                <select name="select" id="select">
+                    <option value ="volvo">恋人</option>
+                    <option value ="saab"  >家人</option>
+                    <option value="opel" select = "selected">基友</option>
+                    <option value="audi">同事</option>
+                </select>
+                      <b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</b>
+                 <button type = "submit">提交闲时信息</button>
+                </form>
+
+                <table width="600" border="0">
+                  <caption>
+                  <h1>行程推荐</h1>
+                     <br></br>
+                      {% if road %}
+                     <h1>行程规划日期 ： {{road.date}}</h1>
+                          <br></br>
+                      {% endif %}
+                  </caption>
+                  <tbody>
+                    <tr>
+<th scope="col">&nbsp;</th>
+
+                </table>
+                 <form method ="post"  action= "/myapp/plan_order/">
+                 {% csrf_token %}
+                <table width="600" border="0">
+                  <tbody>
+                    <tr> </tr>
+                  <td>&nbsp;</td>
+                     {% if content %}
+                             {% for con in content %}
+                                 <br></br>
+                                 <label>***</label>         &nbsp&nbsp&nbsp&nbsp&nbsp
+                           {{ con }}
+
+                                 <br></br>
+                             {% endfor %}
+                        {% endif %}
+                      <td>&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <b>                </b>
+                 <label> 你看好的路线选定： *……*</label>
+                    <br></br>
+                 <form action="/myapp/plan_order/{{ road.id }}/" method="post" >
+
+        <p></p>
+         <!--  单选框 互斥 使用同一个  name 之前在ｈｔｍｌ已经有学习到了，-->
+          1：<input type="radio" name="gender" value="1">&nbsp&nbsp&nbsp&nbsp&nbsp
+        2：<input type="radio" name="gender"  value="2">&nbsp&nbsp&nbsp&nbsp&nbsp
+        3：<input type="radio" name="gender"  value="3">&nbsp&nbsp&nbsp&nbsp&nbsp
+                    4：<input type="radio" name="gender"  value="4">&nbsp&nbsp&nbsp&nbsp&nbsp
+                 5：<input type="radio" name="gender"  value="5">
+       <p></p>
+                  <button type = "submit">生成路线推荐</button>
+                 </form>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp
+
+              	<a href="/myapp/change_plan/">换一批路径</a>
+                 <br></br>
+
+
+                 </form>
+                <b>                </b>
+                <div class="article">
+                  <div class="article_img"> <a href="news.html" title="路线规划" target="_self">
+
+                  <img src="{% static 'images/123456.jpg' %}" alt="路线规划"></a> </div>
+                  <P>智能推荐最短路线为：</p>
+</div>
+                <label for="textarea"></label>
+                <textarea name="textarea" id="textarea" cols="90" rows="5">{{ road.store_route }}</textarea>
+                <div class="readmore"></div>
+              </li>
+            </ul>
+            <div class="met_pager"> <a href="/myapp/" class="NextA">保存路线</a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <div class="met_clear"></div>
+</section>
+<div class="met_clear"></div>
+<!--新闻列表结束-->
+
+<!--底部开始-->
+<div class="met_clear"></div>
+<footer class="tem_footer">
+  <div class="my_inner">
+    <div class="tem_footer_1 lf">
+      <h1>联系我们</h1>
+      <ul>
+        <li>地址: 辽宁省大连市甘井子区凌海路1号</li>
+        <li>单位:&nbsp大连海事大学 信息科学技术学院 </li>
+        <li style="padding-right:72px;">电话:（0411）84727233 </li>
+        <li>Email: To_live_diliberately@dlmu.edu.cn</li>
+      </ul>
+    </div>
+
+    <div class="tem_footer_2 lf">
+      <div class="tem_footer_link">
+<div class="tem_footer_3">
+    
+      <ul>
+           
+           <li></li>
+        </ul>
+   
+  </div>
+ </div>
+</div>
+  
+   
+    <div class="met_clear"></div>
+</div>
+</footer>
+<!--底部结束-->
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ {% load staticfiles %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>评价中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<script src="{% static 'js/jQuery1.8.2.js' %}" type="text/javascript"></script>
+<!--[if IE]><script src="{% static 'js/html5.js' %}" type="text/javascript"></script><![endif]-->
+</head>
+<body>
+<!--头部开始-->
+<header data-waypointsok="" class="header mysection">
+  <div class="tem_inner tem_head mynav mysection_s">
+    <h1> <a class="logo_img" href="" title=""> <img src="{% static 'images/logo1.jpg' %}" alt="" title="" /> </a> </h1>
+    <nav>
+      <ul>
+         <li><a href="/myapp/" title="网站首页">网站首页</a></li>
+        <li><a href="/myapp/self_center/" title="个人中心">个人中心</a></li>
+		<li><a href="/myapp/plan_init/" title="规划行程">规划行程</a></li>
+        <li><a href="/myapp/comment/" title="评论中心">评论中心</a></li>
+        <li><a href="/myapp/diary/" title="日记生成">日记生成</a></li>
+        <li><a href="/myapp/question/" title="在线问答">在线问答</a></li>
+        <li><a href="/myapp/login/" title="注销">注销|切换账号</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!--头部结束-->
+<div class="tem_banner">
+  <ul class="slides" style="height:380px;">
+    <li style="background:url({% static 'images/comment.jpg' %}) no-repeat center center; height:380px;"></li>
+  </ul>
+</div>
+<section class="met_section mynews_aside  ">
+  <aside>
+
+	<!--banner结束-->
+
+      <!--新闻列表-->
+
+            <ul>
+              <li><h1>出行热门榜单</h1></li>
+              <li><a href="" target="_self"><b >1</b>星海广场</a></li>
+              <li><a href="" target="_self"><b >2</b>金石滩</a></li>
+              <li><a href="" target="_self"><b >3</b>发现王国</a></li>
+              <li><a href="" target="_self"><b >4</b>旅顺日俄监狱</a></li>
+              <li><a href="" target="_self"><b >5</b>万达影城</a></li>
+              <li><a href="" target="_self"><b >6</b>老虎滩</a></li>
+              <li><a href="" target="_self"><b >7</b>大连森林动物园</a></li>
+              <li><a href="" target="_self"><b >8</b>“塘潮KTV”</a></li>
+            </ul>
+          </dd>
+        </dl>
+  </aside>
+<article>
+    <div class="met_article">
+      <section class="met_article_head">
+        <h1>撰写评价</h1>
+        <div class="met_position"> <a href="index.html" title="首页">网站首页</a> &gt; <a href="gbook.html">撰写评价</a> </div>
+      </section>
+      <div class="met_clear"></div>
+      <div id="messagelist">
+        <form enctype="multipart/form-data" method="POST" class="ui-from" name="myform" action="/myapp/comment/">
+        {% csrf_token %}
+          <div class="v52fmbx">
+            <input type="hidden" name="lang" value="cn" />
+            <h3 class="v52fmbx_hr">提交评价</h3>
+            <dl>
+              <dt class="ftype_select"> 选择评价地点</dt>
+              <dd class="ftype_input">
+                <label for="select"></label>
+                <select name="select" id="select">
+                    {% for store in store_list %}
+                        <option value ={{ store.id }}>{{ store.name }}</option>
+                     {% endfor %}
+                </select>
+
+                <span class="tips"></span> </dd>
+            </dl>
+
+            <dl>
+              <dt class="ftype_select"> 满意度选择</dt>
+              <dd class="ftype_input">
+                <table width="200">
+                     <tr>
+                    <td><label>
+                      <input type="radio" name="sat" value=1 id="sat0" />
+                      非常满意</label></td>
+                  </tr>
+                  <tr>
+                    <td><label>
+                      <input type="radio" name="sat" value=2 id="sat0" />
+                      满意</label></td>
+                  </tr>
+                  <tr>
+                    <td><label>
+                      <input type="radio" name="sat" value=3 id="sat1" />
+                      不满意</label></td>
+                  </tr>
+                  <tr>
+                    <td><label>
+                      <input type="radio" name="sat" value=4 id="sat2" />
+                      拉入黑名单</label></td>
+                  </tr>
+                </table>
+                <div class="fbox"> </div>
+                <span class="tips"></span> </dd>
+            </dl>
+            <dl>
+              <dt class="ftype_select">意见与建议</dt>
+              <dd class="ftype_input">
+                <div class="fbox">
+                  <input name="para43" type="text" placeholder="输入您真实想法，以便店家改进"  />
+                </div>
+                <span class="tips"></span> </dd>
+            </dl>
+            <dl>
+              <dt class="ftype_select">想法与体会</dt>
+              <dd class="ftype_textarea">
+                <div class="fbox">
+                  <textarea name="con" data-required=1 placeholder="此处不会告知店家，仅用于生成您的日记"></textarea>
+                </div>
+              <span class="tips"></span> </dd>
+            </dl>
+            <dl class="noborder">
+              <dt>&nbsp;</dt>
+              <dd>
+                <input type="submit" name="submit" value="提交信息" class="submit" />
+              </dd>
+            </dl>
+          </div>
+        </form>
+      </div>
+    </div>
+  </article>
+  <div class="met_clear"></div>
+</section>
+<div class="met_clear"></div>
+
+<!--底部开始-->
+<div class="met_clear"></div>
+<footer class="tem_footer">
+  <div class="my_inner">
+    <div class="tem_footer_1 lf">
+      <h1>联系我们</h1>
+      <ul>
+        <li>地址: 辽宁省大连市甘井子区凌海路1号</li>
+        <li>单位:&nbsp大连海事大学 信息科学技术学院 </li>
+        <li style="padding-right:72px;">电话:（0411）84727233 </li>
+        <li>Email: To_live_diliberately@dlmu.edu.cn</li>
+      </ul>
+    </div>
+
+    <div class="tem_footer_2 lf">
+      <div class="tem_footer_link">
+<div class="tem_footer_3">
+
+      <ul>
+
+        <li></li>
+        </ul>
+
+  </div>
+ </div>
+</div>
+
+
+    <div class="met_clear"></div>
+  </div>
+</footer>
+<!--底部结束-->
+</body>
+</html>

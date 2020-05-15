@@ -1,0 +1,82 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>登录</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'css/snow.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static 'css/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<!--<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
+
+<!-- //web font -->
+</head>
+<body>
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<a href="/myapp/register/"  class="active">登录</a><a href="/myapp/register/">注册</a><a href="/myapp/delete/">注销</a>
+</div>
+<h1>Live deliberately. Enjoy your life.</h1>
+<h1>瓦们今天干啥鸭</h1>
+<div class="main-agileits">
+<!--form-stars-here-->
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">登&nbsp录</h2>
+			<form action="/myapp/login/" method="post">
+                {% csrf_token %}
+                <h style = " font-weight: bolder ;">
+          <font color="#743A3A">
+       {% if error %}
+          {{ error }}
+       {% endif %}
+          </font>
+          </h>
+              <h style = " font-weight: bolder ;">
+          <font color="#743A3A">
+       {% if name %}
+                  Congratulations!  {{ name }} register successfully!
+       {% endif %}
+          </font>
+          </h>
+					<input type="text" name="user" placeholder="User ID" required="" />
+					<input type="password" name="passwd" placeholder="Password" required="" />
+					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>
+				<div class="submit-w3l">
+					<input type="submit" value="登录">
+				</div>
+				<p class="p-bottom-w3ls"><a href="/myapp/register/">点击注册</a>如果你没有一个帐户。
+.</p>
+			</form>
+		</div>
+		</div>
+<!--//form-ends-here-->
+<!-- copyright -->
+	<div class="copyright w3-agile">
+		<p> © 2019</p>
+	</div>
+	<!-- //copyright -->
+	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+
+</body>
+</html>
